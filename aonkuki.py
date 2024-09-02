@@ -28,7 +28,7 @@ class BallshooterGame:
         self.ring_direction = 1   #Set the starting motion or movement of the ring
         
         #Set the keyboard key for shooting
-        self.root.bind("<space>", self.shoot.ball)
+        self.root.bind("<space>", self.shoot_ball)
         
         #Start moving the ring
         self.move_ring()
@@ -42,16 +42,17 @@ class BallshooterGame:
                 # Move the ball upward as set by the ball speed
                 self.canvas.move(self.ball, 0, -self.ball_speed)
                     # Create if the ring is hit
-                    if not self.check_collision():
+            if not self.check_collision():
                         # Continue moving the ball if the ring is not hit
                         self.root.after(50, self.move_ball)
-                    else:
-                        # if the ring is hit, score reset tom zero and ball reset to start
-                        self.update_score()
-                        self.reset_ball()
             else:
-                # if the ball reaches the top, reset its position
+                # if the ring is hit, score reset tom zero and ball reset to start
+                self.update_score()
                 self.reset_ball()
+        else:
+            # if the ball reaches the top, reset its position
+            self.reset_ball()
+            
         # Move the ring horizontally
         def move_ring(self):
             self.canvas.move(self.ring, self.ring_speed * self.ring_direction, 0)
